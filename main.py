@@ -12,10 +12,16 @@ driver.get("https://orteil.dashnet.org/experiments/cookie/")
 cookie = driver.find_element(By.ID, value="cookie")
 
 current_time = time.time()
-interval = 5
-
+multiplication_factor = 1
+# Every 5 seconds we get a hold of the money
 while True:
     cookie.click()
+
+    if time.time() - current_time >= 5 * multiplication_factor:
+        money = driver.find_element(By.ID, value="money").text
+        print(money)
+        multiplication_factor += 1
+
 
 
 
